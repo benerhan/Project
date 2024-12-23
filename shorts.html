@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Shorts
+{% endblock %}
+
+{% block main %}
+    <div>
+        <div class="header">
+            <span>Shorts</span>
+        </div>
+        <ul class="product-list">
+            {% for short in shorts %}
+                <li class="product-item">
+                    <a href="/product_detail/{{ short.product_id }}">
+                    <img class="product-image" src="{{ short.image_url }}" alt="{{ short.name }}">
+                    </a>
+                    <div class="product-info">
+                        <h2>{{ short.name }} </h2>
+                        <p>Team: {{ short.team }}</p>
+                        <p>Size: {{ short.size }}</p>
+                        <p>Price: € {{ short.price }}</p>
+                        <p>Country: {{ short.country}}</p>
+                        <p>Description: {{ short.description }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

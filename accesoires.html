@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Accesoires
+{% endblock %}
+
+{% block main %}
+    <div>
+        <div class="header">
+            <span>Accesoires</span>
+        </div>
+        <ul class="product-list">
+            {% for accesoire in accesoires %}
+                <li class="product-item">
+                    <a href="/product_detail/{{ accesoire.product_id }}">
+                    <img class="product-image" src="{{ accesoire.image_url }}" alt="{{ accesoire.name }}">
+                    </a>
+                    <div class="product-info">
+                        <h2>{{ accesoire.name }} </h2>
+                        <p>Team: {{ accesoire.team }}</p>
+                        <p>Size: {{ accesoire.size }}</p>
+                        <p>Price: € {{ accesoire.price }}</p>
+                        <p>Country: {{ accesoire.country}}</p>
+                        <p>Description: {{ accesoire.description }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

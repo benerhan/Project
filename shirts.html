@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Shirts
+{% endblock %}
+
+{% block main %}
+    <div>
+        <div class="header">
+            <span>Shirts</span>
+        </div>
+        <ul class="product-list">
+            {% for shirt in shirts %}
+                <li class="product-item">
+                    <a href="/product_detail/{{ shirt.product_id }}">
+                    <img class="product-image" src="{{ shirt.image_url }}" alt="{{ shirt.name }}">
+                    </a>
+                    <div class="product-info">
+                        <h2>{{ shirt.name }} </h2>
+                        <p>Team: {{ shirt.team }}</p>
+                        <p>Size: {{ shirt.size }}</p>
+                        <p>Price: € {{ shirt.price }}</p>
+                        <p>Country: {{ shirt.country}}</p>
+                        <p>Description: {{ shirt.description }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

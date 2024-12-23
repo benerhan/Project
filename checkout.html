@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Checkout
+{% endblock %}
+
+{% block main %}
+<div class="header">
+    <span>Checkout</span>
+</div>
+
+<div class="checkout">
+    {% if cart %}
+        <div class="checkout-items">
+            <h1>Your Order</h1>
+            <ul class="cart-items">
+                {% for item in cart %}
+                    <li class="cart-item">
+                        <img src="{{ item['product']['image_url'] }}" alt="{{ item['product']['name'] }}" class="checkout-item-image">
+                        <div class="cart-item-info">
+                            <h3>{{ item['product']['name'] }}</h3>
+                            <p>Price: € {{ item['product']['price'] }}</p>
+                            <p>Quantity: {{ item['quantity'] }}</p>
+                            <p style="text-align: right;">Subtotal: € {{ item['product']['price'] * item['quantity'] }}</p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="cart-total" style="text-align: right;">
+                <h3>Total: € {{ total_amount }}</h3>
+            </div>
+        </div>
+        <form action="/checkout" method="POST">
+            <div class="shipping-info">
+                <h3>Shipping Information</h3>
+
+                <label for="name">Full Name:</label>
+                <input type="text" name="name" id="name" required>
+
+                <label for="adress">Shipping Adress:</label>
+                <textarea name="address" id="address" rows="4" required></textarea>
+
+                <label for="city">City:</label>
+                <input type="text" name="city" id="city" required>
+
+                <label for="zip">Postal Code:</label>
+                <input type="text" name="zip" id="zip" required>
+
+                <label for="country">Country</label>
+                <input type="text" name="country" id="country" required>
+            </div>
+
+            <div class="checkout-container">
+                <button type="submit" class="checkout-button">Place Order</button>
+            </div>
+        </form>
+    {% else %}
+        <p>Your cart is empty. Add items to your cart before proceeding to cheeckout</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <div class="header">
+        <span>Welcome to The Futbol Store</span>
+    </div>
+
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for product in products %}
+            <div class="carousel-item {% if loop.first %} active {% endif %}">
+                    <a href="/product_detail/{{ product.product_id }}">
+                    <div class="product">
+                        <img src="{{ product.image_url }}" class="d-block w-50" alt="{{ product.name }}">
+                    </div>
+                    <div class="product-name">
+                        <h5>{{ product.name }}</h5>
+                    </div> 
+                </a>            
+            </div>    
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <style>
+        .carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;           /* Let the height be based on the content */
+            margin-top: 100px;      /* Adjust the margin to bring it closer to the title */
+        }
+
+        .carousel-inner {
+            width: 100%;            /* Ensure the carousel occupies the full width */
+            max-width: 800px;       /* Optional: Limit maximum width */
+            overflow: hidden;       /* Prevent overflow of images */
+        }
+
+        .carousel-inner img {
+            margin: auto;           /* Center the image within the carousel */
+            display: block;         /* Ensure the image behaves as a block element */
+            max-height: 400px;      /* Adjust height to keep images proportional */
+            width: auto;            /* Maintain the original aspect ratio */
+            object-fit: contain;    /* Ensures the image fits without stretching */
+        }
+
+        /* Style for the product name under the image */
+        .product-name {
+            text-align: center;     /* Center the name */
+            font-size: 1.2rem;      /* Adjust the size of the text */
+            color: black;           /* Set text color to black */
+            margin-top: 10px;       /* Add space between image and text */
+        }
+
+        a {
+            text-decoration: none; /* Remove the underline */
+            color: black;          /* Ensure the link text is black */
+        }
+
+        /* Customize the color of the left arrow */
+        .carousel-control-prev-icon {
+        background-color: black; /* Black arrow */
+        border-radius: 50%; /* Optional: make the arrow round */
+        }
+        /* Customize the color of the right arrow */
+        .carousel-control-next-icon {
+        background-color: black; /* Black arrow */
+        border-radius: 50%; /* Optional: make the arrow round */
+        }
+    </style>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your cart
+{% endblock %}
+
+{% block main %}
+<div class="header">
+    <span>Your Cart</span>
+</div>
+<div class="cart">
+    {% if cart %}
+        <ul class="cart-items">
+            {% for item in cart %}
+                <li class="cart-item">
+                    <img src="{{ item['product']['image_url'] }}" alt="{{ item['product']['name'] }}" class="cart-item-image fixed-image">
+                    <div class="card-item-info">
+                        <h3> {{ item['product']['name'] }}</h3>
+                        <p>Price: € {{ item['product']['price'] }} </p>
+                        <p> Quantity: {{ item['quantity'] }}</p>
+                        <p style="text-align: right;">Subtotal: € {{ item['product']['price'] * item['quantity'] }}</p>
+                        <!-- Form to decrease quantity -->
+                        <form action="/remove_from_cart" method="POST">
+                            <input type="hidden" name="product_id" value="{{ item['product']['product_id'] }}">
+                            <label for="quantity">Remove Quantity:</label>
+                            <select name="quantity" id="quantity">
+                                {% for i in range(1, item['quantity'] + 1) %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                            <button type="submit" class="remove-button">Remove</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="cart-total">
+            <h3>Total Price: € {{ total_price }}</h3>
+        </div>
+        <div class="checkout-container">
+            <a href="/checkout" class="checkout-button">Proceed to Checkout</a>
+        </div>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+</div>
+{% endblock %}
+

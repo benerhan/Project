@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Cash to Account
+{% endblock %}
+
+{% block main %}
+<div class="header">
+    <span>Add cash to Account</span>
+</div>
+    <div>
+        <h2 style="margin-top: 100px;"> Current Cash Balance: <span style="color: red;"> € {{ current_cash[0]['cash'] }} </span> </h2>
+    </div>
+    <form action="/update_cash" method="post" style="margin-top: 80px;">
+        <div class="mb-0">
+            <input class="form-control mx-auto w-auto" name="cash_amount" placeholder="Add Cash to account" type="number">
+        </div>
+        <button class="btn btn-primary" type="submit">Add to account</button>
+    </form>
+{% endblock %}
